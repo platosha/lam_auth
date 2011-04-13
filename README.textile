@@ -1,0 +1,42 @@
+Аутентификация для спецпроектов Lookatme
+
+h2. Установка
+
+  gem install lam_auth
+
+После установки/добавления в Gemfile:
+
+  rails generate lam_auth User
+
+после этого нужно добавить настройки приложения для соответствующих environment в config/lam_auth.yml.
+
+h2. Обработчик LoginRequiredException
+
+Для actions, где требуется залогиненный пользователь:
+
+  before_filter :login_required
+
+можно сделать обработчик для LoginRequiredException:
+
+  rescue_from LamAuth::LoginRequiredException, :with => :render_login_required
+
+  private
+
+  def render_login_required
+    render :file => 'shared/login_required', :layout => 'application', :status => 401
+  end
+  
+h2. Подключение панели
+
+Подключить js-код в head:
+  
+  <%= lam_auth_include_tag %>
+  
+Затем:
+
+  <div id="lam-root"></div>
+  <%= lam_auth_init_tag %>
+
+h2. Документация
+
+Подробно о механизме аутентификации — "lam_auth.pdf":http://mindscan.msk.ru/downloads/lam_auth.pdf
