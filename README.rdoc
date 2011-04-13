@@ -37,6 +37,6 @@
   <div id="lam-root"></div>
   <%= lam_auth_init_tag %>
 
-== Подробная документация
+== Подробно о механизме аутентификации
 
 http://mindscan.msk.ru/downloads/lam_auth.pdf
