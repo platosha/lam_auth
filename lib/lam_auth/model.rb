@@ -20,6 +20,8 @@ module LamAuth
           data = ActiveSupport::JSON.decode(body)
           Rails.logger.info("...success: #{data.inspect}")
           create_or_update_by_auth_data(data)
+        else
+          Rails.logger.info("...failed with #{response.code}!")
         end
       rescue Net::ProtoRetriableError => detail
         Rails.logger.info("...failed!")
