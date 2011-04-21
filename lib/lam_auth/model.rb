@@ -22,6 +22,7 @@ module LamAuth
           create_or_update_by_auth_data(data)
         else
           Rails.logger.info("...failed with #{response.code}!")
+          nil
         end
       rescue Net::ProtoRetriableError => detail
         Rails.logger.info("...failed!")
