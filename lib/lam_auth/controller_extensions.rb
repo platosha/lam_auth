@@ -1,13 +1,21 @@
 module LamAuth
   module ControllerExtensions
     def lam_auth_for(klass)
-      class_inheritable_accessor :model_class
-      self.model_class = klass.to_s.classify.constantize
+      class_inheritable_writer :user_model_class
+      self.user_model_class = klass
+      
       helper_method(:current_user, :logged_in?)
       before_filter :login_from_cookie
       
+      extend ClassMethods
       include InstanceMethods
       protected :logged_in?, :current_user, :current_user=, :auth_token, :login_from_cookie, :login_required
+    end
+    
+    module ClassMethods
+      def user_model_class
+        read_inheritable_attribute(:user_model_class).to_s.classify.constantize
+      end
     end
     
     module InstanceMethods
@@ -16,7 +24,7 @@ module LamAuth
       end
   
       def current_user
-        @current_user ||= session[:user] && model_class.find_by_id(session[:user])
+        @current_user ||= session[:user] && self.class.user_model_class.find_by_id(session[:user])
       end
   
       def current_user=(new_user)
@@ -33,7 +41,7 @@ module LamAuth
         if logged_in?
           !auth_token && self.current_user = nil
         else
-          auth_token && self.current_user = model_class.find_by_auth_token(auth_token)
+          auth_token && self.current_user = self.class.user_model_class.find_by_auth_token(auth_token)
         end
       end
   
