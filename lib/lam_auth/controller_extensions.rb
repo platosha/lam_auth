@@ -9,7 +9,7 @@ module LamAuth
       
       extend ClassMethods
       include InstanceMethods
-      protected :logged_in?, :current_user, :current_user=, :auth_token, :login_from_cookie, :login_required
+      protected :logged_in?, :current_user, :current_user=, :access_token, :login_from_cookie, :login_required
     end
     
     module ClassMethods
@@ -32,16 +32,16 @@ module LamAuth
         @current_user = new_user
       end
   
-      def auth_token
+      def access_token
         cookie = cookies[LamAuth.cookie_id]
-        @auth_token ||= LamAuth.valid_cookie?(cookie) && LamAuth.parse_cookie_to_hash(cookie)['access_token']
+        LamAuth.valid_cookie?(cookie) && LamAuth.parse_cookie_to_hash(cookie)['access_token']
       end
   
       def login_from_cookie
         if logged_in?
-          !auth_token && self.current_user = nil
+          !access_token && self.current_user = nil
         else
-          auth_token && self.current_user = self.class.user_model_class.find_by_auth_token(auth_token)
+          access_token && self.current_user = self.class.user_model_class.find_by_access_token(access_token)
         end
       end
   

@@ -10,12 +10,12 @@ module LamAuth
     end
     
     module ClassMethods
-      def find_by_auth_token(auth_token)
-        Rails.logger.info("Trying to authorize a token #{auth_token.inspect} ")
+      def find_by_access_token(access_token)
+        Rails.logger.info("Trying to authorize a token #{access_token.inspect} ")
 
         lam_uri = LamAuth.uri
         http = Net::HTTP.new(lam_uri.host, lam_uri.port)
-        response, body = http.get("#{lam_uri.path}/users/me", {'Authorization' => "Token token=\"#{auth_token}\""})
+        response, body = http.get("#{lam_uri.path}/users/me", {'Authorization' => "Token token=\"#{access_token}\""})
         if response.code == "200"
           data = ActiveSupport::JSON.decode(body)
           Rails.logger.info("...success: #{data.inspect}")
