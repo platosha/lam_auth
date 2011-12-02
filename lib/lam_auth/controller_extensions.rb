@@ -1,8 +1,8 @@
 module LamAuth
   module ControllerExtensions
     def lam_auth_for(klass)
-      class_inheritable_writer :user_model_class
-      self.user_model_class = klass
+      class_attribute :user_model_class_name
+      self.user_model_class_name = klass
       
       helper_method(:current_user, :logged_in?)
       before_filter :login_from_cookie
@@ -14,7 +14,7 @@ module LamAuth
     
     module ClassMethods
       def user_model_class
-        read_inheritable_attribute(:user_model_class).to_s.classify.constantize
+        user_model_class_name.to_s.classify.constantize
       end
     end
     
