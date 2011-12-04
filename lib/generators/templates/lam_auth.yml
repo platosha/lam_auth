@@ -1,13 +1,11 @@
 # return_url можно не указывать, если это дефолтный http://:app-domain/xd_receiver.html
 
 development: &dev
-  app_id: 
-  secret: 
+  app_id: app_id
+  secret: secret
 
 test:
   <<: *dev
 
 production:
-  app_id:
-  secret:
-  return_url:
+  <<: *dev
