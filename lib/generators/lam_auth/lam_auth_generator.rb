@@ -19,10 +19,6 @@ module LamAuth
       def copy_yml
         copy_file 'lam_auth.yml', 'config/lam_auth.yml'
       end
-      
-      def show_readme
-        readme "README" if behavior == :invoke
-      end
     end
   end
 end
