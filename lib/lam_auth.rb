@@ -13,7 +13,7 @@ module LamAuth
   
   class << self
     def config
-      @config ||= YAML.load_file(Rails.root.join("config/lam_auth.yml"))[Rails.env]
+      @config ||= YAML.load_file(Rails.root.join("config/lam_auth.yml"))
     end
     
     def url
