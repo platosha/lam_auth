@@ -15,9 +15,9 @@ module LamAuth
 
         lam_uri = LamAuth.uri
         http = Net::HTTP.new(lam_uri.host, lam_uri.port)
-        response, body = http.get("#{lam_uri.path}/users/me", {'Authorization' => "Token token=\"#{access_token}\""})
+        response = http.get("#{lam_uri.path}/users/me", {'Authorization' => "Token token=\"#{access_token}\""})
         if response.code == "200"
-          data = ActiveSupport::JSON.decode(body)
+          data = ActiveSupport::JSON.decode(response.body)
           Rails.logger.info("...success: #{data.inspect}")
           create_or_update_by_auth_data(data)
         else
