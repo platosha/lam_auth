@@ -1,16 +1,10 @@
 module LamAuth
   module Generators
-    class LamAuthGenerator < Rails::Generators::NamedBase
+    class LamAuthGenerator < Rails::Generators::Base
       namespace "lam_auth"
       source_root File.expand_path("../../templates", __FILE__)
 
-      desc "Installs lam_auth: generates a model plus includes required extensions."
-      
-      hook_for :orm
-      
-      def inject_controller_content
-        inject_into_class(File.join("app", "controllers", "application_controller.rb"), 'ApplicationController', "  lam_auth_for :#{file_path}\n")
-      end
+      desc "Installs lam_auth"
       
       def copy_xd_receiver
         copy_file 'xd_receiver.html', 'public/xd_receiver.html'
