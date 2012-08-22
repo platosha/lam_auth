@@ -1,5 +1,7 @@
 Аутентификация для спецпроектов [Lookatme](http://www.lookatme.ru) и [The Village](http://www.the-village.ru)
 
+[Описание механизма аутентификации](https://github.com/downloads/macovsky/lam_auth/Look%20At%20Me%20&%20The%20Village%20OAuth.pdf)
+
 ## Установка
 
     gem install lam_auth
@@ -142,4 +144,3 @@ end
 before_filter :authenticate!
 ```
 
-[Описание механизма аутентификации](https://github.com/downloads/macovsky/lam_auth/Look%20At%20Me%20&%20The%20Village%20OAuth.pdf)
