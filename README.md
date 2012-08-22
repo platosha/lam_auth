@@ -48,7 +48,7 @@
   "login"      => "macovsky"}
 ```
 
-В модели пользователя нужно подключить `LamAuth`:
+В модели пользователя нужно подключить модуль `LamAuth::Model`:
 
 ```ruby
 class User < ActiveRecord::Base
@@ -141,3 +141,5 @@ end
 ```ruby
 before_filter :authenticate!
 ```
+
+[Описание механизма аутентификации](https://github.com/downloads/macovsky/lam_auth/Look%20At%20Me%20&%20The%20Village%20OAuth.pdf)
