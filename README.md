@@ -47,7 +47,8 @@
   },
   "first_name" => "Шляпа",
   "birthday"   => "13-12-1979",
-  "login"      => "macovsky"}
+  "login"      => "macovsky"
+ }
 ```
 
 В модели пользователя нужно подключить модуль `LamAuth::Model`:
