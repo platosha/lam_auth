@@ -23,7 +23,7 @@ module LamAuth
           'prefix' => 'village', 
           'url' => 'http://www.the-village.ru',
           'api' => 'VLG',
-          'api_url' => 'http://assets0.the-village.ru/api/js/VLG.Login.js',
+          'api_url' => 'http://www.the-village.ru/api/js/VLG.Login.js',
         }
       }[site]
     end
